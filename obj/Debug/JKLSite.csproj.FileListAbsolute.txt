@@ -1,0 +1,110 @@
+D:\Git Projects\JKL\JKLSite\obj\Debug\JKLSite.csprojResolveAssemblyReference.cache
+D:\Git Projects\JKL\JKLSite\bin\JKLSite.dll.config
+D:\Git Projects\JKL\JKLSite\bin\JKLSite.dll
+D:\Git Projects\JKL\JKLSite\bin\JKLSite.pdb
+D:\Git Projects\JKL\JKLSite\bin\Antlr3.Runtime.dll
+D:\Git Projects\JKL\JKLSite\bin\EntityFramework.dll
+D:\Git Projects\JKL\JKLSite\bin\EntityFramework.SqlServer.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.Google.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Web.Infrastructure.dll
+D:\Git Projects\JKL\JKLSite\bin\Newtonsoft.Json.dll
+D:\Git Projects\JKL\JKLSite\bin\Owin.dll
+D:\Git Projects\JKL\JKLSite\bin\System.Web.Helpers.dll
+D:\Git Projects\JKL\JKLSite\bin\System.Web.Mvc.dll
+D:\Git Projects\JKL\JKLSite\bin\System.Web.Optimization.dll
+D:\Git Projects\JKL\JKLSite\bin\System.Web.Razor.dll
+D:\Git Projects\JKL\JKLSite\bin\System.Web.WebPages.Deployment.dll
+D:\Git Projects\JKL\JKLSite\bin\System.Web.WebPages.dll
+D:\Git Projects\JKL\JKLSite\bin\System.Web.WebPages.Razor.dll
+D:\Git Projects\JKL\JKLSite\bin\WebGrease.dll
+D:\Git Projects\JKL\JKLSite\bin\Antlr3.Runtime.pdb
+D:\Git Projects\JKL\JKLSite\bin\EntityFramework.xml
+D:\Git Projects\JKL\JKLSite\bin\EntityFramework.SqlServer.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.Google.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Git Projects\JKL\JKLSite\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Git Projects\JKL\JKLSite\bin\Newtonsoft.Json.xml
+D:\Git Projects\JKL\JKLSite\bin\System.Web.Helpers.xml
+D:\Git Projects\JKL\JKLSite\bin\System.Web.Mvc.xml
+D:\Git Projects\JKL\JKLSite\bin\System.Web.Optimization.xml
+D:\Git Projects\JKL\JKLSite\bin\System.Web.Razor.xml
+D:\Git Projects\JKL\JKLSite\bin\System.Web.WebPages.xml
+D:\Git Projects\JKL\JKLSite\bin\System.Web.WebPages.Deployment.xml
+D:\Git Projects\JKL\JKLSite\bin\System.Web.WebPages.Razor.xml
+D:\Git Projects\JKL\JKLSite\obj\Debug\JKLSite.dll
+D:\Git Projects\JKL\JKLSite\obj\Debug\JKLSite.pdb
+D:\Git Projects\JKL Company\JKL company\bin\JKLSite.dll.config
+D:\Git Projects\JKL Company\JKL company\bin\JKLSite.dll
+D:\Git Projects\JKL Company\JKL company\bin\JKLSite.pdb
+D:\Git Projects\JKL Company\JKL company\bin\Antlr3.Runtime.dll
+D:\Git Projects\JKL Company\JKL company\bin\EntityFramework.dll
+D:\Git Projects\JKL Company\JKL company\bin\EntityFramework.SqlServer.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.Google.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Web.Infrastructure.dll
+D:\Git Projects\JKL Company\JKL company\bin\Newtonsoft.Json.dll
+D:\Git Projects\JKL Company\JKL company\bin\Owin.dll
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.Helpers.dll
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.Mvc.dll
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.Optimization.dll
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.Razor.dll
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.WebPages.Deployment.dll
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.WebPages.dll
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.WebPages.Razor.dll
+D:\Git Projects\JKL Company\JKL company\bin\WebGrease.dll
+D:\Git Projects\JKL Company\JKL company\bin\Antlr3.Runtime.pdb
+D:\Git Projects\JKL Company\JKL company\bin\EntityFramework.xml
+D:\Git Projects\JKL Company\JKL company\bin\EntityFramework.SqlServer.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.Google.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Git Projects\JKL Company\JKL company\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Git Projects\JKL Company\JKL company\bin\Newtonsoft.Json.xml
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.Helpers.xml
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.Mvc.xml
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.Optimization.xml
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.Razor.xml
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.WebPages.xml
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.WebPages.Deployment.xml
+D:\Git Projects\JKL Company\JKL company\bin\System.Web.WebPages.Razor.xml
+D:\Git Projects\JKL Company\JKL company\obj\Debug\JKLSite.csprojResolveAssemblyReference.cache
+D:\Git Projects\JKL Company\JKL company\obj\Debug\JKLSite.dll
+D:\Git Projects\JKL Company\JKL company\obj\Debug\JKLSite.pdb

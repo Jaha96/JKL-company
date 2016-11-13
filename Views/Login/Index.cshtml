@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="col-sm-8">
+        <h3 class="form-group col-lg-offset-6">Тавтай морилно уу!</h3>
+         <form action="@Url.Action("UserLogin","Login")" method="POST" role="form">
+            <div class="row">
+                <div class="form-group col-lg-offset-6">
+                    <label for="input1">Нэр</label>
+                    <input type="text" id="name" class="form-control" name="name">
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="input3">Нууц үг</label>
+                    <input type="password" id="password" class="form-control" name="password">
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <table>
+                        <tr>
+                            <td class="col-lg-5">
+                                <label for="rd1">JKL-ын ажилтан</label>
+                            </td>
+                            <td class="col-lg-1">
+                                <input style="width:15px; height:15px" type="radio" checked value="1" id="rd1" name="rd1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-lg-5">
+                                <label for="rd2" class="control-label">Далайн тээврийн компаны ажилтан</label>
+                            </td>
+                            <td class="col-lg-1">
+                                <input style="width:15px; height:15px" type="radio" value="2" id="rd2" name="rd1">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="col-lg-5">
+                                <label for="rd3" class="control-label">Далайчин</label>
+                            </td>
+                            <td class="col-lg-1">
+                                <input style="width:15px; height:15px" type="radio" value="3" id="rd3" name="rd1">
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label style="color:red">@ViewBag.Message</label>
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <button class="btn btn-primary" type="submit">Нэвтрэх</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

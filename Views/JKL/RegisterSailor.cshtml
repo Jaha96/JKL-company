@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "RegisterSailor";
+    Layout = "~/Views/Shared/_Layout_JKL.cshtml";
+}
+
+<div class="container">
+    <div class="col-sm-8">
+        <h3 class="form-group col-lg-offset-6">Далайчин бүртгэх</h3>
+        <form action="@Url.Action("SailorAdd","JKL")" method="POST" role="form">
+            <div class="row">
+                <div class="form-group col-lg-offset-6">
+                    <label for="sailorName">Далайчны Нэр</label>
+                    <input type="text" id="sailorName" class="form-control" name="sailorName">
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="birthDate">Төрсөн огноо</label>
+                    <input type="date" class="form-control" id="birthDate" name="birthDate"/>
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="maritial">Гэр бүлийн байдал</label>
+                    @Html.DropDownList("maritial", new SelectList(ViewBag.MaritialList, "Value", "Text"),new  { @class="form-control", id="maritial",name="maritial" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="address">Хаяг</label>
+                    <input type="text" id="address" class="form-control" name="address">
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="height">Өндөр</label>
+                    <input type="text" id="height" class="form-control" name="height">
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="weight">Жин</label>
+                    <input type="text" id="weight" class="form-control" name="weight">
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="bloodType">Цусны бүлэг</label>
+                    @Html.DropDownList("bloodType", new SelectList(ViewBag.BloodType, "Value", "Text"), new { @class = "form-control", id = "bloodType", name = "bloodType" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="shoeSize">Гуталны размер</label>
+                    <input type="text" id="shoeSize" class="form-control" name="shoeSize">
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="jobStatus">Ажилтаны төлөв</label>
+                    @Html.DropDownList("jobStatus", new SelectList(ViewBag.JobStatus, "Value", "Text"), new { @class = "form-control", id = "jobStatus", name = "jobStatus" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label style="color:red">@ViewBag.Message</label>
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <button class="btn btn-primary" type="submit">Бүртгэх</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
