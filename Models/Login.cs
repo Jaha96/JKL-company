@@ -30,6 +30,10 @@ namespace JKLSite.Models
             if (UserType == 1) { 
                 cmd.CommandText = "SELECT * FROM admin where name='"+Name+"' AND password='"+Password+"' ";
             }
+            if (UserType == 2)
+            {
+                cmd.CommandText = "SELECT * FROM Company where email='" + Name + "' AND password='" + Password + "' ";
+            }
             try
             {
                 //Класс System.Text-д байгаа
@@ -53,6 +57,29 @@ namespace JKLSite.Models
                 conn.Dispose();
             }
             return false;
+        }
+        public DataTable getCompany()
+        {
+                DataSet ds = new DataSet();
+                using (SqlConnection Con = new SqlConnection(ConfigurationManager.AppSettings["dsn"]))
+                {
+                    //string SQL = "select * from products where id = @ProductID";
+                    string SQL = "SELECT * FROM Company where email=@Name AND password=@Password";
+                    Con.Open();
+
+
+                    using (SqlCommand Com = new SqlCommand(SQL, Con))
+                    {
+                        Com.Parameters.Add(new SqlParameter("@Name", Name));
+                        Com.Parameters.Add(new SqlParameter("@Password", Password));
+                        using (SqlDataAdapter adap = new SqlDataAdapter(Com))
+                        {
+                            adap.Fill(ds);
+                        }
+                    }
+                    Con.Dispose();
+                }
+            return ds.Tables[0];
         }
     }
 }

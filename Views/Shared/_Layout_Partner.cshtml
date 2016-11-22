@@ -13,6 +13,11 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+       $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+    </script>
 </head>
 <body>
 
@@ -26,27 +31,27 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- You'll want to use a responsive image option so this logo looks good on devices - I recommend using something like retina.js (do a quick Google search for it and you'll find it) -->
-                @Html.ActionLink("JKL-Компани", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("JKL-Company", "Index", new { controller = "Home" }, new { @class = "navbar-brand" })
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    
                     <li id="about">
-                       @Html.ActionLink("Бидний тухай", "Index", "About")
+                        @Html.ActionLink("Орон тоо бүртгэх", "AddEmployee", "Partner")
+                    </li>
+                    <li id="about">
+                        @Html.ActionLink("Ажилтны мэдээлэл", "AboutSailor", "Partner")
                     </li>
                     <li id="services">
-                        @Html.ActionLink("Үйлчилгээнүүд", "Index", "Services")
+                        @Html.ActionLink("Усан онгоц бүртгэх", "AddVessel", "Partner")
                     </li>
-                    <li id="contact">
-                        @Html.ActionLink("Холбоо барих", "Index", "Contact")
+                    <li id="services">
+                        @Html.ActionLink("Компаны мэдээлэл", "Index", "Partner")
                     </li>
-                    <li id="contact">
-                        @Html.ActionLink("Нэвтрэх", "Index", "Login")
+                    <li id="services">
+                        @Html.ActionLink("Гарах", "LogOut", "Partner")
                     </li>
-                    
-                    
                     
                 </ul>
             </div>

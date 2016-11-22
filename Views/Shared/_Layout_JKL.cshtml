@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Modern Business - @ViewBag.Title</title>
+    <title>JKL Компани - @ViewBag.Title</title>
 
     <!-- Bootstrap -->
     <link href="@Url.Content("/css/bootstrap.css")" rel="stylesheet">
@@ -38,7 +38,10 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li id="about">
-                        @Html.ActionLink("Үйлчилгээний түүх", "Index", "About")
+                        @Html.ActionLink("Үйлчилгээний түүх", "Index", "JKL")
+                    </li>
+                    <li id="about">
+                        @Html.ActionLink("Ажилд явуулах", "RegisterService", "JKL")
                     </li>
                     <li id="portfolio" class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Бүртгэл <b class="caret"></b></a>
@@ -47,14 +50,27 @@
                                 @Html.ActionLink("Ажилтан бүртгэх", "RegisterSailor", "JKL")
                             </li>
                             <li id="singleportfolioitem">
-                                @Html.ActionLink("Компани бүртгэх", "SingleItem", "Portfolio")
+                                @Html.ActionLink("Компани бүртгэх", "RegisterCompany", "JKL")
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="portfolio" class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Мэдээллийн удирдлага <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li id="1columnportfolio">
+                                @Html.ActionLink("Ажилчид", "ListSailor", "JKL")
+                            </li>
+                            <li id="singleportfolioitem">
+                                @Html.ActionLink("Компаниуд", "ListCompany", "JKL")
                             </li>
                         </ul>
                     </li>
                     <li id="services">
-                        @Html.ActionLink("Мэдээллүүд", "Index", "Services")
+                        @Html.ActionLink("Мэдээллүүд", "Notifications", "JKL")
                     </li>
-                    
+                    <li id="singleportfolioitem">
+                        @Html.ActionLink("Гарах", "LogOut", "JKL")
+                    </li>
                     
                     
                 </ul>

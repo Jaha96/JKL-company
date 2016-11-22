@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Орон тоо бүртгэх";
+    Layout = "~/Views/Shared/_Layout_Partner.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">
+                <ol class="breadcrumb">
+                    <li style="color:white">
+                        Бүртгэл
+                    </li>
+                    <li class="active">Орон тоо бүртгэх</li>
+                </ol>
+            </h3>
+
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <form action="@Url.Action("EmployeeAdd","Partner")" method="POST" role="form">
+            <div class="row">
+                <div class="form-group col-lg-offset-6">
+                    <label for="sailorName">Далайчны Зэрэглэл</label>
+                    @Html.DropDownList("RankId", new SelectList(ViewBag.RankList, "Value", "Text"), new { @class = "form-control", id = "RankId", name = "RankId" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="sailorName">Усан онгоц</label>
+                    @Html.DropDownList("VesselId", new SelectList(ViewBag.VesselList, "Value", "Text"), new { @class = "form-control", id = "VesselId", name = "VesselId" })
+                    @Html.Hidden("CompanyId",new { ViewBag.Company })
+                </div>
+
+                <div class="form-group col-lg-offset-6">
+                    <label style="color:red">@ViewBag.Message</label>
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <button class="btn btn-primary" type="submit">Бүртгэх</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

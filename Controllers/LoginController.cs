@@ -23,19 +23,25 @@ namespace JKLSite.Controllers
             lg.Password = Request["password"];
             lg.UserType =Convert.ToInt16( Request["rd1"]);
             
-            switch(lg.UserType)
+            if(!lg.Connect())
             {
-                case 1:
-                    if (lg.Connect()) {
-                        Session["User"] = lg.Name;
-                        return RedirectToAction("Index", "JKL");
-                    }
-                    else {
-                        ViewBag.Message = "Нууц үг эсвэл нэвтрэх нэр буруу байна!";
-                        return View("Index", ViewBag);
-                    }
-                case 2:
-                    break;
+                ViewBag.Message = "Нууц үг эсвэл нэвтрэх нэр буруу байна!";
+                return View("Index", ViewBag);
+            }
+            else
+            { 
+                switch(lg.UserType)
+                {
+                    case 1:
+                            Session["User"] = lg.Name;
+                            return RedirectToAction("Index", "JKL");
+                   
+                    case 2:
+                            Session["Partner"] = lg.getCompany();
+                            return RedirectToAction("Index", "Partner");
+                    case 3:
+                        break;
+                }
             }
 
             return View("Index");

@@ -1,6 +1,5 @@
-﻿
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Company";
     Layout = "~/Views/Shared/_Layout_JKL.cshtml";
 }
 
@@ -10,16 +9,18 @@
             <h3 class="page-header">
                 <ol class="breadcrumb">
                     <li style="color:white">
-                        Home
+                        Мэдээллийн удирдлага
                     </li>
-                    <li class="active">Үйлчилгээний түүх</li>
+                    <li class="active">Компаны жагсаалт</li>
                 </ol>
             </h3>
-            
+
         </div>
     </div>
     <div class="col-sm-12">
         @ViewBag.ErrorMessage
-        @{ Html.RenderPartial("~/Views/JKL/ServiceHistory.ascx"); }
+        @{ Html.RenderPartial("~/Views/JKL/ListCompany.ascx"); }
+
     </div>
 </div>
+
