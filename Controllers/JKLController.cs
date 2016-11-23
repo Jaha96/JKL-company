@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using JKLSite.Models;
+using System.Data;
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace JKLSite.Controllers
 {
@@ -27,7 +30,28 @@ namespace JKLSite.Controllers
         }
         public ActionResult ListSailor()
         {
-            return View("Sailor");
+            DataSet ds = new DataSet();
+            using (SqlConnection Con = new SqlConnection(ConfigurationManager.AppSettings["dsn"]))
+            {
+                //string SQL = "select * from products where id = @ProductID";
+                string SQL = @"SELECT s.SailorId,s.SailorName,s.DateOfBirth,
+	                           m.Detail,s.Address,s.Height,s.Weight,
+	                           s.BloodType,s.ShoeSize,j.NameMon,s.Password 
+	                           FROM Sailor s
+	                           Left join Maritial m on s.MaritialStatus=m.MaritialId
+	                           Left join JobStatus j on s.JobStatus=j.JobId";
+                Con.Open();
+                using (SqlCommand Com = new SqlCommand(SQL, Con))
+                {
+                    //Com.Parameters.Add(new SqlParameter("@ProductID", ProductID));
+                    using (SqlDataAdapter adap = new SqlDataAdapter(Com))
+                    {
+                        adap.Fill(ds);
+                    }
+                }
+                Con.Dispose();
+            }
+            return View("Sailor",ds.Tables[0].Rows);
         }
         public ActionResult Notifications()
         {

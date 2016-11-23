@@ -18,18 +18,18 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-4">
-            <img src="~/App_Data/images/userProfile.jpg" class="img-responsive">
+        <div class="col-md-3">
+            <img src="~/Images/profile-pictures.png" class="img-responsive">
         </div>
-        <div class="col-md-8 navbar-form">
+        <div class="col-md-9 navbar-form">
             <table>
                 @for(int i=0;i< Model.Count; i++)
                 {
                 <tr>
-                    <td>
+                    <td style="padding-left:20px">
                         @Model[i].ItemArray[0]
                     </td>
-                    <td>
+                    <td style="padding-left:20px; padding-right:20px">
                         @Model[i].ItemArray[1]
                     </td>
                 </tr>

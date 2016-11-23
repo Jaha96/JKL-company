@@ -238,6 +238,7 @@
     <Content Include="Global.asax" />
     <Content Include="Images\jkl-logo-01.png" />
     <Content Include="Images\JKL.jpg" />
+    <Content Include="Images\profile-pictures.png" />
     <Content Include="Images\userProfile.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
@@ -338,6 +339,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_Layout_Sailor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Sailor\AboutCompany.cshtml" />
+    <Content Include="Views\Sailor\AboutSailor.cshtml" />
+    <Content Include="Views\Sailor\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
