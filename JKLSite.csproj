@@ -182,6 +182,7 @@
     <Compile Include="Controllers\OtherController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
+    <Compile Include="Controllers\SailorController.cs" />
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -192,6 +193,7 @@
     <Compile Include="Models\JKLModel.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\PartnerModel.cs" />
+    <Compile Include="Models\SailorModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -222,6 +224,7 @@
     <Content Include="App_Data\Database_log.ldf">
       <DependentUpon>Database.mdf</DependentUpon>
     </Content>
+    <Content Include="App_Data\images\userProfile.jpg" />
     <Content Include="App_Data\images\del.png" />
     <Content Include="App_Data\images\jkl-logo-01.png" />
     <Content Include="App_Data\images\JKL.jpg" />
@@ -233,6 +236,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\jkl-logo-01.png" />
+    <Content Include="Images\JKL.jpg" />
+    <Content Include="Images\userProfile.jpg" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -243,7 +249,9 @@
     <Content Include="Views\JKL\ListCompany.ascx" />
     <Content Include="Views\JKL\ListSailor.ascx" />
     <Content Include="Views\JKL\ServiceHistory.ascx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -324,6 +332,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Partner\AddVessel.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Partner\AboutSailor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_Layout_Sailor.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

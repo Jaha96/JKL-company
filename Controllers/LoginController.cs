@@ -40,10 +40,10 @@ namespace JKLSite.Controllers
                             Session["Partner"] = lg.getCompany();
                             return RedirectToAction("Index", "Partner");
                     case 3:
-                        break;
+                            Session["Sailor"] = lg.getSailor();
+                            return RedirectToAction("Index", "Sailor");
                 }
             }
-
             return View("Index");
         }
     }

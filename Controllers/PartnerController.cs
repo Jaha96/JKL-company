@@ -38,7 +38,17 @@ namespace JKLSite.Controllers
         }
         public ActionResult VesselAdd()
         {
+            pm.VesselName = Request["vesselName"];
+            pm.CompanyId = Convert.ToInt32(Request["CompanyId"].ToString().Split(' ')[3]);
+            pm.VesselType = Request["VesselType"];
+            pm.Flag = Request["Flag"];
+
+            ViewBag.ErrorMessage = pm.VesselAdd();
             return View("Index");
+        }
+        public ActionResult AboutSailor()
+        {
+            return View();
         }
         public ActionResult AddVessel()
         {

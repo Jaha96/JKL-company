@@ -34,6 +34,10 @@ namespace JKLSite.Models
             {
                 cmd.CommandText = "SELECT * FROM Company where email='" + Name + "' AND password='" + Password + "' ";
             }
+            if (UserType == 3)
+            {
+                cmd.CommandText = "SELECT * FROM Sailor where sailorId='" + Name + "' AND password='" + Password + "' ";
+            }
             try
             {
                 //Класс System.Text-д байгаа
@@ -79,6 +83,33 @@ namespace JKLSite.Models
                     }
                     Con.Dispose();
                 }
+            return ds.Tables[0];
+        }
+        public DataTable getSailor()
+        {
+            DataSet ds = new DataSet();
+            using (SqlConnection Con = new SqlConnection(ConfigurationManager.AppSettings["dsn"]))
+            {
+                //string SQL = "select * from products where id = @ProductID";
+                string SQL = @"SELECT s.SailorId,s.SailorName,s.DateOfBirth,
+	                           m.Detail,s.Address,s.Height,s.Weight,
+	                           s.BloodType,s.ShoeSize,j.NameMon,s.Password 
+	                           FROM Sailor s
+	                           Left join Maritial m on s.MaritialStatus=m.MaritialId
+	                           Left join JobStatus j on s.JobStatus=j.JobId where SailorId=@Name";
+                Con.Open();
+
+
+                using (SqlCommand Com = new SqlCommand(SQL, Con))
+                {
+                    Com.Parameters.Add(new SqlParameter("@Name", Name));
+                    using (SqlDataAdapter adap = new SqlDataAdapter(Com))
+                    {
+                        adap.Fill(ds);
+                    }
+                }
+                Con.Dispose();
+            }
             return ds.Tables[0];
         }
     }

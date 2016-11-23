@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Далайчны тухай";
+    Layout = "~/Views/Shared/_Layout_Sailor.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">
+                <ol class="breadcrumb">
+                    <li style="color:white">
+                        Home
+                    </li>
+                    <li class="active">Далайчны тухай</li>
+                </ol>
+            </h3>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="~/App_Data/images/userProfile.jpg" class="img-responsive">
+        </div>
+        <div class="col-md-8 navbar-form">
+            <table>
+                @for(int i=0;i< Model.Count; i++)
+                {
+                <tr>
+                    <td>
+                        @Model[i].ItemArray[0]
+                    </td>
+                    <td>
+                        @Model[i].ItemArray[1]
+                    </td>
+                </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>

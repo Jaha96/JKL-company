@@ -1,25 +1,24 @@
-﻿@{
-    ViewBag.Title = "Company";
-    Layout = "~/Views/Shared/_Layout_JKL.cshtml";
+﻿
+@{
+    ViewBag.Title = "AboutSailor";
+    Layout = "~/Views/Shared/_Layout_Partner.cshtml";
 }
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
             <h3 class="page-header">
                 <ol class="breadcrumb">
                     <li style="color:white">
-                        Мэдээллийн удирдлага
+                        Home
                     </li>
-                    <li class="active">Компаны жагсаалт</li>
+                    <li class="active">Далайчдын жагсаалт</li>
                 </ol>
             </h3>
+
         </div>
     </div>
     <div class="col-sm-12">
         @ViewBag.ErrorMessage
-        @{ Html.RenderPartial("~/Views/JKL/ListCompany.ascx"); }
-
+        @{ Html.RenderPartial("~/Views/JKL/ListSailor.ascx"); }
     </div>
 </div>
-

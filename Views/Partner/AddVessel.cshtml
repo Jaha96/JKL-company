@@ -23,9 +23,17 @@
         <form action="@Url.Action("VesselAdd","Partner")" method="POST" role="form">
             <div class="row">
                 <div class="form-group col-lg-offset-6">
-                    <label for="sailorName">Усан онгоцны Нэр</label>
-                    <input type="text" id="sailorName" class="form-control" name="sailorName">
+                    <label for="VesselName">Усан онгоцны Нэр</label>
+                    <input type="text" id="VesselName" class="form-control" name="VesselName">
                     @Html.Hidden("CompanyId", new { ViewBag.Company })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="VesselType">Усан онгоцны төрөл</label>
+                    <input type="text" id="VesselType" class="form-control" name="VesselType">
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="Flag">Улс</label>
+                    <input type="text" id="Flag" class="form-control" name="Flag">
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label style="color:red">@ViewBag.Message</label>
