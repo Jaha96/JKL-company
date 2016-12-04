@@ -18,17 +18,24 @@ namespace JKLSite.Views.JKL
         SqlCommand cmd;
         SqlDataAdapter da;
         DataSet ds;
+        int Companyid=0;
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             if (!IsPostBack)
             {
                 BindData();
+                
             }
         }
         public void BindData()
         {
+            Companyid = Convert.ToInt32(Session["CompanyId"]);
+            string sql;
+            if (Companyid == 0) { sql = "Select * from Company"; }
+            else { sql = "Select * from Company where CompanyId=" + Companyid.ToString(); }
             con = new SqlConnection(dbcon);
-            da = new SqlDataAdapter("Select * from Company", con);
+            da = new SqlDataAdapter(sql, con);
             ds = new DataSet();
             da.Fill(ds, "Company");
             CompanyGrid.DataSource = ds.Tables["Company"].DefaultView;

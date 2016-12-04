@@ -1,0 +1,94 @@
+﻿@model JKLSite.Models.Sailor
+@{
+    ViewBag.Title = "Статус өөрчлөх";
+    Layout = "~/Views/Shared/_Layout_JKL.cshtml";
+    string HeaderText = "Далайчин статус өөрчлөх";
+    string submitText = "Өөрчлөх";
+    DateTime date = new DateTime();
+    if (Model != null)
+    {
+        date = Model.BirthDate;
+    }
+    else { date = Convert.ToDateTime("1900/01/01"); }
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">
+                <ol class="breadcrumb">
+                    <li style="color:white">
+                        Бүртгэл
+                    </li>
+                    <li class="active">@HeaderText</li>
+                </ol>
+            </h3>
+
+        </div>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="col-sm-8">
+
+            <div class="row">
+
+                <div class="form-group col-lg-offset-6">
+                    <label style="color:red">@ViewBag.Message</label>
+                    <label style="color:red">@ViewBag.ErrorMessage</label>
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="sailorName">Далайчны Нэр</label>
+                    @Html.TextBoxFor(a => a.SailorName, new { @class = "form-control", @readonly = "readonly" })
+                    @Html.HiddenFor(a => a.SailorId)
+                    @Html.Hidden("HistoryId",new { ViewBag.HistoryId1 })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="birthDate">Төрсөн огноо</label>
+                    @Html.TextBoxFor(a => a.BirthDate, new { @type = "date", @class = "form-control", @Value = date.ToString("yyyy-MM-dd"), @readonly = "readonly" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="maritial">Гэр бүлийн байдал</label>
+                    @Html.DropDownListFor(a => a.MaritialStatus, new SelectList(ViewBag.MaritialList, "Value", "Text"), new { @readonly = "readonly", @class = "form-control" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="address">Хаяг</label>
+                    @Html.TextBoxFor(a => a.Address, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="height">Өндөр</label>
+                    @Html.TextBoxFor(a => a.Height, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="weight">Жин</label>
+                    @Html.TextBoxFor(a => a.Weight, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="bloodType">Цусны бүлэг</label>
+                    @Html.DropDownListFor(a => a.BloodType, new SelectList(ViewBag.BloodTypeList, "Value", "Text"), new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="shoeSize">Гуталны размер</label>
+                    @Html.TextBoxFor(a => a.ShoeSize, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <label for="jobStatus">Ажилтаны төлөв</label>
+                    @Html.DropDownListFor(a => a.JobStatus, new SelectList(ViewBag.JobStatusList, "Value", "Text"), new { @class = "form-control" })
+                </div>
+                @if(ViewBag.notificationType==1)
+                { 
+                <div class="form-group col-lg-offset-6">
+                    <label for="jobStatus">Амрах сар</label>
+                    @Html.TextBoxFor(a => a.VacationMonth, new { @class = "form-control" })
+                </div>
+                }
+                <div class="form-group col-lg-offset-6">
+                    <label for="jobStatus">Нууц үг</label>
+                    @Html.TextBoxFor(a => a.Password, new { @class = "form-control", type = "password", @readonly = "readonly" })
+                </div>
+                <div class="form-group col-lg-offset-6">
+                    <button class="btn btn-primary" type="submit">@submitText</button>
+                </div>
+            </div>
+        </div>
+    }
+</div>

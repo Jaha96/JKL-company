@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewBag.Title = "Notifications";
+    ViewBag.Title = "Мэдээллүүд";
     Layout = "~/Views/Shared/_Layout_JKL.cshtml";
+    int type = 1;
 }
 
 <div class="container">
@@ -19,7 +20,78 @@
         </div>
     </div>
     <div class="col-sm-12">
-        @ViewBag.ErrorMessage
-        Мэдээлэл хоосон байна
+         @ViewBag.ErrorMessage
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Ажилтаны нэр</th>
+                    <th>Ажилласан компани</th>
+                    <th>Тайлбар</th>
+                    <th>Дууссан хугацаа</th>
+                    <th>Үйлдэл</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(int i=0; i< Model.Tables["Table1"].Rows.Count;i++)
+                { 
+                <tr>
+                    <td>@Model.Tables["Table1"].Rows[i]["SailorName"]</td>
+                    <td>@Model.Tables["Table1"].Rows[i]["CompanyName"]</td>
+                        @if (Model.Tables["Table1"].Rows[i]["ContractEndDate"].ToString() != "")
+                        {
+                            type = 1;
+                            <td>Гэрээ дууссан</td>
+                            <td>@Model.Tables["Table1"].Rows[i]["ContractEndDate"]</td>
+                        }
+                        else
+                        {
+                            type = 2;
+                            <td>Амралт дууссан</td>
+                            <td>@Model.Tables["Table1"].Rows[i]["SignOfDate"]</td>
+                        }
+                    <td>
+                        @Html.ActionLink("Ажилтны статус өөрчлөх", "StatusSailor", new { id = Model.Tables["Table1"].Rows[i]["SailorId"],type=type,historyId= Model.Tables["Table1"].Rows[i]["HistoryId"] })
+                    </td>
+                </tr>
+                }
+               
+            
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <h3 class="page-header">
+                <ol class="breadcrumb">
+                    <li class="active">Орон тооны жагсаалт</li>
+                </ol>
+            </h3>
+
+        </div>
+    </div>
+    <div class="col-sm-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Компаны нэр</th>
+                    <th>Усан онгоцны нэр</th>
+                    <th>Зэрэглэл</th>
+                    <th>Үйлдэл</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Tables["Employee"].Rows.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.Tables["Employee"].Rows[i]["Id"]</td>
+                        <td>@Model.Tables["Employee"].Rows[i]["CompanyName"]</td>
+                        <td>@Model.Tables["Employee"].Rows[i]["VesselName"]</td>
+                        <td>@Model.Tables["Employee"].Rows[i]["DescMon"]</td>
+                        <td>
+                            @Html.ActionLink("Тохирох далайчинг сонгох", "RegisterEmployee", new { empId = Model.Tables["Employee"].Rows[i]["Id"] ,companyId= Model.Tables["Employee"].Rows[i]["CompanyId"],vesselId= Model.Tables["Employee"].Rows[i]["VesselId"], rankId= Model.Tables["Employee"].Rows[i]["RankId"] })
+                        </td>
+                    </tr>
+                }
+        </table>
     </div>
 </div>

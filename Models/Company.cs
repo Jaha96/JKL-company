@@ -10,14 +10,16 @@ namespace JKLSite.Models
     [Table("Company")]
     public class Company
     {
-        [Key]
-        public int CompanyId { get; }
+        public int CompanyId { get; set; }
         public  string CompanyName { get; set; }
         public  string ContactPerson { get; set; }
-        public static string Email { get; set; }
-        public static string Phone { get; set; }
-        public static string Address { get; set; }
-        public static string Password { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
+        public string Password { get; set; }
+        public string Type { get; set; }
+        //2-edit
+        //3-delete
 
     }
 }

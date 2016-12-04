@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 
 namespace JKLSite.Models
 {
@@ -59,7 +60,7 @@ namespace JKLSite.Models
             items.Add(new SelectListItem { Text = "AB-", Value = "AB-" });
             return items.ToArray();
         }
-        public static SelectListItem[] getJobStatus()
+        public static SelectListItem[] getJobStatus(int a=0)
         {
             items.Clear();
                 //GetDataSet
@@ -84,9 +85,20 @@ namespace JKLSite.Models
 
             foreach(DataRow dr in ds.Tables[0].Rows)
             {
+                if (a == 1)
+                {
+                    string val = dr["JobId"].ToString();
+                    if (val == "1" || val == "2") { continue; }
+                }
+                if (a == 2)
+                {
+                    string val = dr["JobId"].ToString();
+                    if (val == "1" || val == "2" || val == "3") { continue; }
+                }
                 items.Add(new SelectListItem { Text = dr["JobId"].ToString()+"-"+dr["NameMon"].ToString(), Value = dr["JobId"].ToString() });
             }
-
+            
+            
             return items.ToArray();
         }
 
@@ -190,103 +202,49 @@ namespace JKLSite.Models
             return items.ToArray();
         }
 
-        public static string SailorAdd()
-        {
-            string dsn = (string)ConfigurationManager.AppSettings["dsn"];
-            SqlConnection conn = new SqlConnection(dsn);
-            //Коммандын төрлийг сонгох тохиолдолд дараах байдлаар үүсгэнэ.
-            SqlCommand cmd = new SqlCommand("AddSailor", conn);
-            //Коммандын төрөл профедур болохыг зааж байна
-            cmd.CommandType = CommandType.StoredProcedure;
-            //Уг процедурыг дуудахад дараах параметрүүдийг дамжуулна
-            cmd.Parameters.AddWithValue("@SailorName ",sailorName );
-            cmd.Parameters.AddWithValue("@DateOfBirth ", dateOfBirth);
-            cmd.Parameters.AddWithValue("@MaritialStatus ", maritialStatus);
-            cmd.Parameters.AddWithValue("@Address ", address);
-            cmd.Parameters.AddWithValue("@Height ", height);
-            cmd.Parameters.AddWithValue("@Weight ", weight);
-            cmd.Parameters.AddWithValue("@BloodType ", bloodType);
-            cmd.Parameters.AddWithValue("@ShoeSize ", shoeSize);
-            cmd.Parameters.AddWithValue("@JobStatus ", jobStatus);
-            //Процедурын гаралтын параметрийг дараахь байдлаар үүсгэн холбож өгнө
-            SqlParameter idParam = new SqlParameter("@SailorId ", SqlDbType.Int);
-            idParam.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(idParam);
+        
 
-            try
-            {
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                return ex.ToString();
-            }
-            finally
-            {
-                conn.Dispose();
-            }
-            return "Далайчин амжилттай нэмэгдлээ";
-        }
 
-        public static string CompanyAdd()
-        {
-            string dsn = (string)ConfigurationManager.AppSettings["dsn"];
-            SqlConnection conn = new SqlConnection(dsn);
-            //Коммандын төрлийг сонгох тохиолдолд дараах байдлаар үүсгэнэ.
-            SqlCommand cmd = new SqlCommand("AddCompany", conn);
-            //Коммандын төрөл профедур болохыг зааж байна
-            cmd.CommandType = CommandType.StoredProcedure;
-            //Уг процедурыг дуудахад дараах параметрүүдийг дамжуулна
-            cmd.Parameters.AddWithValue("@CompanyName ", CompanyName);
-            cmd.Parameters.AddWithValue("@ContactPerson ", CompanyContactPerson);
-            cmd.Parameters.AddWithValue("@Email ", CompanyEmail);
-            cmd.Parameters.AddWithValue("@Phone ", CompanyPhone);
-            cmd.Parameters.AddWithValue("@Address ", CompanyAddress);
-            cmd.Parameters.AddWithValue("@Password ", CompanyPassword);
-            //Процедурын гаралтын параметрийг дараахь байдлаар үүсгэн холбож өгнө
-            SqlParameter idParam = new SqlParameter("@CompanyId ", SqlDbType.Int);
-            idParam.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(idParam);
-            try
-            {
-                conn.Open();
-                cmd.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                return ex.ToString();
-            }
-            finally
-            {
-                conn.Dispose();
-            }
-            return "Компани амжилттай нэмэгдлээ";
-        }
         public static string dbcon = (string)ConfigurationManager.AppSettings["dsn"];
         public static DataSet ServiceSelect()
         {
             SqlConnection con = new SqlConnection(dbcon);
-            SqlDataAdapter da = new SqlDataAdapter("Select * from ServiceHistory", con);
-            SqlDataAdapter db = new SqlDataAdapter("Select * from Sailor", con);
+            string sqlEmployee = @"select e.*,c.CompanyName,v.VesselName,r.DescMon from Employee e
+                                    left join Company c on e.CompanyId=c.CompanyId
+                                    left join Vessel v on e.VesselId=v.Vesselid
+                                    left join Rank r on e.RankId=r.RankId";
+
+            string sql = @"Select * from ServiceHistory h 
+                            left join Sailor s on h.SailorId = s.SailorId
+                            left join Vessel v on h.VesselId=v.Vesselid
+                            left join Company c on v.CompanyId=c.CompanyId";
+            SqlDataAdapter da = new SqlDataAdapter(sql, con);
+            SqlDataAdapter daEmployee = new SqlDataAdapter(sqlEmployee, con);
             DataSet ds = new DataSet();
             da.Fill(ds, "ServiceHistory");
-            db.Fill(ds, "Sailor");
+            daEmployee.Fill(ds, "Employee");
             DateTime now = DateTime.Now;
             DataTable newTable = new DataTable();
             newTable.Columns.Add("SailorId");
+            newTable.Columns["SailorId"].DataType= System.Type.GetType("System.Int32");
+            newTable.Columns.Add("HistoryId");
+            newTable.Columns.Add("SailorName");
+            newTable.Columns.Add("CompanyName");
             newTable.Columns.Add("ContractEndDate");
             newTable.Columns.Add("SignOfDate");
             foreach (DataRow dr in ds.Tables["ServiceHistory"].Rows)
             {
                 if (Convert.ToBoolean(dr["SignoffPort"])) { continue; }
-                object[] oParam = new object[3];
+                object[] oParam = new object[6];
                 oParam[0] = Convert.ToInt16(dr["SailorId"]);
+                oParam[1] = dr["SequenceNumber"].ToString();
+                oParam[2] = dr["SailorName"].ToString();
+                oParam[3] = dr["CompanyName"].ToString();
                 if (dr["SignOfDate"].ToString() == "")
                 {
                     if (Convert.ToDateTime(dr["ContractEndDate"]) <= now)
                     {
-                        oParam[1] = dr["ContractEndDate"];
+                        oParam[4] = dr["ContractEndDate"];
                         newTable.Rows.Add(oParam);
                     }
                 }
@@ -294,7 +252,7 @@ namespace JKLSite.Models
                 {
                     if (Convert.ToDateTime(dr["SignOfDate"].ToString()) <= now)
                     {
-                        oParam[2] = dr["SignOfDate"];
+                        oParam[5] = dr["SignOfDate"];
                         newTable.Rows.Add(oParam);
                     }
                 }
@@ -302,52 +260,12 @@ namespace JKLSite.Models
             ds.Tables.Add(newTable);
             return ds;
         }
-        public static void getNotifications()
+        public static DataSet getNotifications()
         {
             DataSet SailorDt = ServiceSelect();
-            
+            return SailorDt;
         }
-        public static string ServiceAdd()
-        {
-            ServiceContractEndDate= ServiceSignOnDate.AddMonths(ServiceContractPerion);
-            string dsn = (string)ConfigurationManager.AppSettings["dsn"];
-            SqlConnection conn = new SqlConnection(dsn);
-            //Коммандын төрлийг сонгох тохиолдолд дараах байдлаар үүсгэнэ.
-            SqlCommand cmd = new SqlCommand("AddService", conn);
-            //Коммандын төрөл профедур болохыг зааж байна
-            cmd.CommandType = CommandType.StoredProcedure;
-            //Уг процедурыг дуудахад дараах параметрүүдийг дамжуулна
-            cmd.Parameters.AddWithValue("@SailorId ", ServiceSailorId);
-            cmd.Parameters.AddWithValue("@RankId ", ServiceRankId);
-            cmd.Parameters.AddWithValue("@VesselId ", ServiceVesselId);
-            cmd.Parameters.AddWithValue("@SignOnDate ", ServiceSignOnDate);
-            cmd.Parameters.AddWithValue("@SignOnPort ", "");
-            cmd.Parameters.AddWithValue("@SignOffPort ", "");
-            cmd.Parameters.AddWithValue("@ContractPerion ", ServiceContractPerion);
-            cmd.Parameters.AddWithValue("@ContractEndDate ", ServiceContractEndDate);
-            //Процедурын гаралтын параметрийг дараахь байдлаар үүсгэн холбож өгнө
-            SqlParameter idParam = new SqlParameter("@SequenceNumber ", SqlDbType.Int);
-            idParam.Direction = ParameterDirection.Output;
-            cmd.Parameters.Add(idParam);
-            try
-            {
-                conn.Open();
-                cmd.ExecuteNonQuery();
-                IDbCommand cmd1 = conn.CreateCommand();
-                cmd1.CommandText = "update sailor set JobStatus=2 where SailorId=@sailorId";
-                cmd1.Parameters.Add(new SqlParameter("@sailorId", ServiceSailorId));
-                cmd1.ExecuteNonQuery();
-            }
-            catch (SqlException ex)
-            {
-                return ex.ToString();
-            }
-            finally
-            {
-                conn.Dispose();
-            }
-            return "Үйлчилгээний түүх амжилттай нэмэгдлээ";
-        }
+        
 
     }
 }

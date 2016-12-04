@@ -19,7 +19,12 @@
     </div>
     <div class="col-sm-12">
         @ViewBag.ErrorMessage
-        @{ Html.RenderPartial("~/Views/JKL/ListCompany.ascx"); }
+        @if (ViewBag.isCompanyBe)
+        {
+            Html.RenderPartial("~/Views/JKL/ListCompany.ascx");
+        }
+        else { <p>Бичлэг байхгүй байна</p>}
+
 
     </div>
 </div>

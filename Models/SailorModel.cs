@@ -37,6 +37,31 @@ namespace JKLSite.Models
             }
             return ds.Tables[0];
         }
+        public DataTable GetSailorWorkCompany(int id)
+        {
+            DataSet ds = new DataSet();
+            using (SqlConnection Con = new SqlConnection(ConfigurationManager.AppSettings["dsn"]))
+            {
+                //string SQL = "select * from products where id = @ProductID";
+                string SQL = @"select * from servicehistory sh
+                                left join Vessel v on sh.VesselId=v.Vesselid
+                                left join Company c on v.CompanyId=c.CompanyId
+                                where SailorId=@id";
+                Con.Open();
+
+
+                using (SqlCommand Com = new SqlCommand(SQL, Con))
+                {
+                    Com.Parameters.Add(new SqlParameter("@id", id));
+                    using (SqlDataAdapter adap = new SqlDataAdapter(Com))
+                    {
+                        adap.Fill(ds);
+                    }
+                }
+                Con.Dispose();
+            }
+            return ds.Tables[0];
+        }
         public object[] getListName()
         {
             object[] obj = new object[10];

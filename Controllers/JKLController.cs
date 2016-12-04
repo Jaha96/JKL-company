@@ -4,89 +4,164 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using JKLSite.Models;
+using JKLSite.DB;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Web.UI.WebControls;
 
 namespace JKLSite.Controllers
 {
     public class JKLController : Controller
     {
         // GET: JKL
+        Connect cn = new Connect();
+        Company cm = new Company();
+        Sailor sm = new Sailor();
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult RegisterSailor()
+        public ActionResult RegisterSailor()    // Calling when we first hit controller.
         {
             ViewBag.MaritialList = JKLModel.getMaritialStatus();
-            ViewBag.BloodType = JKLModel.getBloodType();
-            ViewBag.JobStatus= JKLModel.getJobStatus();
+            ViewBag.BloodTypeList = JKLModel.getBloodType();
+            ViewBag.JobStatusList= JKLModel.getJobStatus();
             return View();
         }
-        public ActionResult RegisterCompany()
+        [HttpPost]
+        public ActionResult RegisterSailor(Sailor SM)
+        {
+            ViewBag.ErrorMessage = cn.SailorAdd(SM);
+            ViewBag.MaritialList = JKLModel.getMaritialStatus();
+            ViewBag.BloodTypeList = JKLModel.getBloodType();
+            ViewBag.JobStatusList = JKLModel.getJobStatus();
+            return View();
+        }
+        public ActionResult EditSailor(int id)
+        {
+            DataSet ds = cn.SailorDS(id);
+            DataRow dr = ds.Tables[0].Rows[0];
+            sm.SailorId = Convert.ToInt32(dr["SailorId"]);
+            sm.SailorName = dr["SailorName"].ToString();
+            sm.BirthDate = Convert.ToDateTime(dr["DateOfBirth"]);
+            sm.MaritialStatus = Convert.ToInt32(dr["MaritialStatus"]);
+            sm.Address = dr["Address"].ToString();
+            sm.Height = Convert.ToDouble(dr["Height"]);
+            sm.Weight = Convert.ToDouble(dr["Weight"]);
+            sm.BloodType = dr["BloodType"].ToString();
+            sm.ShoeSize = Convert.ToInt32(dr["ShoeSize"]);
+            sm.JobStatus = Convert.ToInt32(dr["JobStatus"]);
+            sm.Password = dr["Password"].ToString();
+            sm.Type = 2.ToString();//edit Type
+            ViewBag.MaritialList = JKLModel.getMaritialStatus();
+            ViewBag.BloodTypeList = JKLModel.getBloodType();
+            ViewBag.JobStatusList = JKLModel.getJobStatus();
+            return View("RegisterSailor", sm);
+        }
+
+        public ActionResult StatusSailor(int id)
+        {
+            int notifType = Convert.ToInt32(Request["type"]);
+            int historyId = Convert.ToInt32(Request["historyId"]);
+            DataSet ds = cn.SailorDS(id);
+            DataRow dr = ds.Tables[0].Rows[0];
+            sm.SailorId = Convert.ToInt32(dr["SailorId"]);
+            sm.SailorName = dr["SailorName"].ToString();
+            sm.BirthDate = Convert.ToDateTime(dr["DateOfBirth"]);
+            sm.MaritialStatus = Convert.ToInt32(dr["MaritialStatus"]);
+            sm.Address = dr["Address"].ToString();
+            sm.Height = Convert.ToDouble(dr["Height"]);
+            sm.Weight = Convert.ToDouble(dr["Weight"]);
+            sm.BloodType = dr["BloodType"].ToString();
+            sm.ShoeSize = Convert.ToInt32(dr["ShoeSize"]);
+            sm.JobStatus = Convert.ToInt32(dr["JobStatus"]);
+            sm.Password = dr["Password"].ToString();
+            sm.Type = 3.ToString();//Type:status change 
+            ViewBag.MaritialList = JKLModel.getMaritialStatus();
+            ViewBag.BloodTypeList = JKLModel.getBloodType();
+            ViewBag.notificationType = notifType;
+            ViewBag.HistoryId1 = historyId;
+            if (notifType == 1) { ViewBag.JobStatusList = JKLModel.getJobStatus(1); }
+            if (notifType == 2) { ViewBag.JobStatusList = JKLModel.getJobStatus(2); }
+
+            return View("StatusSailor", sm);
+        }
+        [HttpPost]
+        public ActionResult StatusSailor(Sailor SM)
+        {
+            int historyId = Convert.ToInt32(Request["historyId"]);
+            ViewBag.ErrorMessage = cn.SailorUpdate(SM)+"\n";
+            if (SM.JobStatus == 3)
+            {
+                DateTime now = DateTime.Now;
+                DateTime vacationDate = now.AddMonths(SM.VacationMonth);
+                ViewBag.ErrorMessage += cn.ServiceUpdate(historyId, vacationDate);
+            }
+            else
+            {
+                ViewBag.ErrorMessage += cn.ServiceUpdate(historyId);
+            }
+            return RedirectToAction("Notifications");
+        }
+        [HttpPost]
+        public ActionResult EditSailor(Sailor SM)
+        {
+            ViewBag.ErrorMessage = cn.SailorUpdate(SM);
+            return View("Sailor");
+        }
+        public ActionResult DeleteSailor(int id)
+        {
+            ViewBag.ErrorMessage = cn.SailorDelete(id);
+            return RedirectToAction("ListSailor");
+        }
+        public ActionResult RegisterCompany()   // Calling when we first hit controller.
         {
             return View();
         }
+        [HttpPost]
+        public ActionResult RegisterCompany(Company CM) // Calling on http post (on Submit)
+        {
+            ViewBag.ErrorMessage = cn.CompanyAdd(CM);
+            return View();
+        }
+        public ActionResult EditCompany(int id) 
+        {
+            DataSet ds= cn.CompanyDS(id);
+            DataRow dr = ds.Tables[0].Rows[0];
+            cm.CompanyId = id;
+            cm.CompanyName = dr.ItemArray[1].ToString();
+            cm.ContactPerson = dr.ItemArray[2].ToString();
+            cm.Email= dr.ItemArray[3].ToString();
+            cm.Phone= dr.ItemArray[4].ToString();
+            cm.Address= dr.ItemArray[5].ToString();
+            cm.Password= dr.ItemArray[6].ToString();
+            cm.Type = 2.ToString();//edit Type
+            return View("RegisterCompany",cm);
+        }
+        [HttpPost]
+        public ActionResult EditCompany(Company CM)
+        {
+            ViewBag.ErrorMessage = cn.CompanyUpdate(CM);
+            return View("RegisterCompany");
+        }
+        public ActionResult DeleteCompany(int id)
+        {
+            ViewBag.ErrorMessage = cn.CompanyDelete(id);
+            return RedirectToAction("ListCompany");
+        }
+       
         public ActionResult ListSailor()
         {
-            DataSet ds = new DataSet();
-            using (SqlConnection Con = new SqlConnection(ConfigurationManager.AppSettings["dsn"]))
-            {
-                //string SQL = "select * from products where id = @ProductID";
-                string SQL = @"SELECT s.SailorId,s.SailorName,s.DateOfBirth,
-	                           m.Detail,s.Address,s.Height,s.Weight,
-	                           s.BloodType,s.ShoeSize,j.NameMon,s.Password 
-	                           FROM Sailor s
-	                           Left join Maritial m on s.MaritialStatus=m.MaritialId
-	                           Left join JobStatus j on s.JobStatus=j.JobId";
-                Con.Open();
-                using (SqlCommand Com = new SqlCommand(SQL, Con))
-                {
-                    //Com.Parameters.Add(new SqlParameter("@ProductID", ProductID));
-                    using (SqlDataAdapter adap = new SqlDataAdapter(Com))
-                    {
-                        adap.Fill(ds);
-                    }
-                }
-                Con.Dispose();
-            }
-            return View("Sailor",ds.Tables[0].Rows);
+            return View("Sailor",cn.SailorDS().Tables[0].Rows);
         }
         public ActionResult Notifications()
         {
-            JKLModel.getNotifications();
-            return View();
+            return View(JKLModel.getNotifications());
         }
         public ActionResult ListCompany()
         {
-            return View("Company");
-        }
-        [HttpPost]
-        public ActionResult SailorAdd()
-        {
-            JKLModel.sailorName = Request["sailorName"];
-            JKLModel.dateOfBirth =Convert.ToDateTime( Request["birthDate"]);
-            JKLModel.maritialStatus = Convert.ToInt16(Request["maritial"]);
-            JKLModel.address = Request["address"];
-            JKLModel.height = Convert.ToDouble(Request["height"]);
-            JKLModel.weight = Convert.ToDouble(Request["weight"]);
-            JKLModel.bloodType = Request["bloodType"];
-            JKLModel.shoeSize = Convert.ToInt16(Request["shoeSize"]);
-            JKLModel.jobStatus = Convert.ToInt16(Request["JobStatus"]);
-            ViewBag.ErrorMessage= JKLModel.SailorAdd();
-            return View("Index");
-        }
-        public ActionResult CompanyAdd()
-        {
-            JKLModel.CompanyName = Request["CompanyName"];
-            JKLModel.CompanyContactPerson = Request["ContactPerson"];
-            JKLModel.CompanyEmail = Request["Email"];
-            JKLModel.CompanyPhone = Request["Phone"];
-            JKLModel.CompanyAddress = Request["Address"];
-            JKLModel.CompanyPassword = Request["Password"];
-            ViewBag.ErrorMessage = JKLModel.CompanyAdd();
-            return View("Index");
+            return View("Company",cn.CompanyDS().Tables[0].Rows);
         }
         public ActionResult RegisterService()
         {
@@ -95,20 +170,41 @@ namespace JKLSite.Controllers
             ViewBag.VesselList= JKLModel.getVessel(null);
             return View();
         }
+        [HttpPost]
+        public ActionResult RegisterService(ServiceModel SM) // Calling on http post (on Submit)
+        {
+            ViewBag.ErrorMessage = cn.ServiceAdd(SM);
+            return View();
+        }
+        public ActionResult RegisterEmployee()
+        {
+            int empId = Convert.ToInt32(Request["empId"]);
+            int companyId = Convert.ToInt32(Request["companyId"]);
+            int vesselId = Convert.ToInt32(Request["vesselId"]);
+            int rankId = Convert.ToInt32(Request["rankId"]);
+            ServiceModel SM = new ServiceModel();
+            SM.HistoryId = empId;
+            SM.VesselId = vesselId;
+            SM.RankId = rankId;
+            ViewBag.SailorList = JKLModel.getSailor();
+            ViewBag.RankList = JKLModel.getRank();
+            ViewBag.VesselList = JKLModel.getVessel(null);
+            return View("AddEmployee",SM);
+        }
+        [HttpPost]
+        public ActionResult RegisterEmployee(ServiceModel SM) // Calling on http post (on Submit)
+        {
+            ViewBag.SailorList = JKLModel.getSailor();
+            ViewBag.RankList = JKLModel.getRank();
+            ViewBag.VesselList = JKLModel.getVessel(null);
+            ViewBag.ErrorMessage = cn.ServiceAdd(SM);
+            cn.EmployeeDelete(SM.HistoryId);
+            return View("AddEmployee");
+        }
         public ActionResult LogOut()
         {
             Session.Remove("User");
             return RedirectToAction("Index", "Home");
-        }
-        public ActionResult ServiceAdd()
-        {
-            JKLModel.ServiceSailorId=Convert.ToInt16( Request["SailorId"]);
-            JKLModel.ServiceRankId = Convert.ToInt16(Request["RankId"]);
-            JKLModel.ServiceVesselId = Convert.ToInt16(Request["VesselId"]);
-            JKLModel.ServiceSignOnDate = Convert.ToDateTime(Request["SignOnDate"]);
-            JKLModel.ServiceContractPerion = Convert.ToInt16(Request["ContractPerion"]);
-            ViewBag.ErrorMessage = JKLModel.ServiceAdd();
-            return View("Index");
         }
     }
 }

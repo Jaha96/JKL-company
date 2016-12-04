@@ -1,4 +1,5 @@
-﻿@{
+﻿@using PagedList.Mvc;
+@{
     ViewBag.Title = "Company";
     Layout = "~/Views/Shared/_Layout_JKL.cshtml";
 }
@@ -18,7 +19,64 @@
     </div>
     <div class="col-sm-12">
         @ViewBag.ErrorMessage
-        @{ Html.RenderPartial("~/Views/JKL/ListCompany.ascx"); }
+        <table width="100%" class="table table-hover">
+            <tr style="background-color:black">
+                <th>
+                    Компаны ID
+                </th>
+                <th>
+                    Компаны нэр
+                </th>
+                <th>
+                    Холбогдох хүн
+                </th>
+                <th>
+                    Мэйл хаяг
+                </th>
+                <th>
+                    Утас
+                </th>
+                <th>
+                    Хаяг
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model[i].ItemArray[0]
+                    </td>
+                    <td>
+                        @Model[i].ItemArray[1]
+                    </td>
+                    <td>
+                        @Model[i].ItemArray[2]
+                    </td>
+                    <td>
+                        @Model[i].ItemArray[3]
+                    </td>
+                    <td>
+                        @Model[i].ItemArray[4]
+                    </td>
+                    <td>
+                        @Model[i].ItemArray[5]
+                    </td>
+                    <td>
+                        @Html.ActionLink("Засах", "EditCompany", new { id = Model[i].ItemArray[0] })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Устгах", "DeleteCompany", new { id = Model[i].ItemArray[0]},new { onclick = "return confirm('Та устгахад итгэлтэй байна уу?');" })
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    @Html.ActionLink("Шинээр нэмэх", "RegisterCompany")
+                </td>
+            </tr>
+        </table>
 
     </div>
 </div>

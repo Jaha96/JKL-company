@@ -13,11 +13,16 @@ namespace JKLSite.Controllers
         // GET: Sailor
         public ActionResult Index()
         {
+            DataTable dt = (DataTable)Session["Sailor"];
+            int SailorId = Convert.ToInt32(dt.Rows[0]["SailorId"]);
+            Session["SailorId"] = SailorId;
             return View();
         }
         public ActionResult LogOut()
         {
             Session.Remove("Sailor");
+            Session.Remove("SailorId");
+            Session.Remove("CompanyId");
             return RedirectToAction("Index", "Home");
         }
         public ActionResult AboutSailor()
@@ -41,6 +46,19 @@ namespace JKLSite.Controllers
         }
         public ActionResult AboutCompany()
         {
+            int CompanyId = 0;
+            ViewBag.isCompanyBe = true;
+            SailorModel sm = new SailorModel();
+            DataTable dt = (DataTable)Session["Sailor"];
+            int SailorId = Convert.ToInt32(dt.Rows[0]["SailorId"]);
+            DataTable SailorDt = sm.GetSailorWorkCompany(SailorId);
+            int row = SailorDt.Rows.Count - 1;
+            if (SailorDt.Rows.Count != 0) {
+                CompanyId = Convert.ToInt32(SailorDt.Rows[row]["CompanyId"]);
+                Session["CompanyId"] = CompanyId;
+            }
+            else { ViewBag.isCompanyBe = false; }
+            
             return View();
         }
     }

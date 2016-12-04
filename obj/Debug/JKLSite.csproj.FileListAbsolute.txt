@@ -108,3 +108,7 @@ D:\Git Projects\JKL Company\JKL company\bin\System.Web.WebPages.Razor.xml
 D:\Git Projects\JKL Company\JKL company\obj\Debug\JKLSite.csprojResolveAssemblyReference.cache
 D:\Git Projects\JKL Company\JKL company\obj\Debug\JKLSite.dll
 D:\Git Projects\JKL Company\JKL company\obj\Debug\JKLSite.pdb
+D:\Git Projects\JKL Company\JKL company\bin\PagedList.dll
+D:\Git Projects\JKL Company\JKL company\bin\PagedList.Mvc.dll
+D:\Git Projects\JKL Company\JKL company\bin\PagedList.xml
+D:\Git Projects\JKL Company\JKL company\bin\PagedList.Mvc.xml

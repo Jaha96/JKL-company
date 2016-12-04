@@ -1,6 +1,6 @@
-﻿
+﻿@model JKLSite.Models.ServiceModel
 @{
-    ViewBag.Title = "RegisterService";
+    ViewBag.Title = "Ажилтан бүртгэх";
     Layout = "~/Views/Shared/_Layout_JKL.cshtml";
 }
 
@@ -18,20 +18,27 @@
 
         </div>
     </div>
+@using (Html.BeginForm())
+{
     <div class="col-sm-8">
-        <form action="@Url.Action("ServiceAdd","JKL")" method="POST" role="form">
+        
             <div class="row">
                 <div class="form-group col-lg-offset-6">
+                    <label style="color:red">@ViewBag.Message</label>
+                    <label style="color:red">@ViewBag.ErrorMessage</label>
+                </div>
+                <div class="form-group col-lg-offset-6">
                     <label for="sailorName">Далайчны Нэр</label>
-                    @Html.DropDownList("SailorId", new SelectList(ViewBag.SailorList, "Value", "Text"), new { @class = "form-control", id = "SailorId", name = "SailorId" })
+                    @Html.DropDownListFor(a=>a.SailorId, new SelectList(ViewBag.SailorList, "Value", "Text"), new { @class = "form-control", id = "SailorId", name = "SailorId" })
+                  
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="sailorName">Далайчны Зэрэглэл</label>
-                    @Html.DropDownList("RankId", new SelectList(ViewBag.RankList, "Value", "Text"), new { @class = "form-control", id = "RankId", name = "RankId" })
+                    @Html.DropDownListFor(a=>a.RankId, new SelectList(ViewBag.RankList, "Value", "Text"), new { @class = "form-control", id = "RankId", name = "RankId" })
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="sailorName">Усан онгоц</label>
-                    @Html.DropDownList("VesselId", new SelectList(ViewBag.VesselList, "Value", "Text"), new { @class = "form-control", id = "VesselId", name = "VesselId" })
+                    @Html.DropDownListFor(a=>a.VesselId, new SelectList(ViewBag.VesselList, "Value", "Text"), new { @class = "form-control", id = "VesselId", name = "VesselId" })
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="SignOnDate">Эхлэх хугацаа</label>
@@ -39,18 +46,17 @@
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="ContractPerion">Ажиллах хугацаа(Сараар)</label>
-                    <input type="text" class="form-control" id="ContractPerion" name="ContractPerion" />
+                    @Html.TextBoxFor(a=>a.PeriodMonth,new { @class = "form-control" } )
+             
                 </div>
                
-                <div class="form-group col-lg-offset-6">
-                    <label style="color:red">@ViewBag.Message</label>
-                </div>
                 <div class="form-group col-lg-offset-6">
                     <button class="btn btn-primary" type="submit">Бүртгэх</button>
                 </div>
             </div>
-        </form>
+        
     </div>
+}
 </div>
 
 

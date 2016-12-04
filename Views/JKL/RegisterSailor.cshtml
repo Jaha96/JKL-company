@@ -1,7 +1,20 @@
-﻿
+﻿@model JKLSite.Models.Sailor
 @{
     ViewBag.Title = "RegisterSailor";
     Layout = "~/Views/Shared/_Layout_JKL.cshtml";
+    string HeaderText = "Далайчин бүртгэх";
+    string submitText = "Бүртгэх";
+    DateTime date = new DateTime();
+    if (Model != null)
+    {
+        if (Model.Type == "2")
+        {
+            HeaderText = "Далайчин засах";
+            submitText = "Засах";
+        }
+        date = Model.BirthDate;
+    }
+    else { date = Convert.ToDateTime("1900/01/01"); }
 }
 
 <div class="container">
@@ -12,58 +25,67 @@
                     <li style="color:white">
                         Бүртгэл
                     </li>
-                    <li class="active">Ажилтан бүртгэх</li>
+                    <li class="active">@HeaderText</li>
                 </ol>
             </h3>
 
         </div>
     </div>
+@using (Html.BeginForm())
+{
     <div class="col-sm-8">
-        <form action="@Url.Action("SailorAdd","JKL")" method="POST" role="form">
+
             <div class="row">
+
+                <div class="form-group col-lg-offset-6">
+                    <label style="color:red">@ViewBag.Message</label>
+                    <label style="color:red">@ViewBag.ErrorMessage</label>
+                </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="sailorName">Далайчны Нэр</label>
-                    <input type="text" id="sailorName" class="form-control" name="sailorName">
+                    @Html.TextBoxFor(a => a.SailorName, new { @class = "form-control" })
+                    @Html.HiddenFor(a => a.SailorId)
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="birthDate">Төрсөн огноо</label>
-                    <input type="date" value="1990-01-01" class="form-control" id="birthDate" name="birthDate" />
-                </div>
+                    @Html.TextBoxFor(a=>a.BirthDate,new { @type="date",@class="form-control", @Value= date.ToString("yyyy-MM-dd") })
+                    </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="maritial">Гэр бүлийн байдал</label>
-                    @Html.DropDownList("maritial", new SelectList(ViewBag.MaritialList, "Value", "Text"), new { @class = "form-control", id = "maritial", name = "maritial" })
+                    @Html.DropDownListFor(a=>a.MaritialStatus, new SelectList(ViewBag.MaritialList, "Value", "Text"), new { @class = "form-control"})
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="address">Хаяг</label>
-                    <input type="text" id="address" class="form-control" name="address">
+                    @Html.TextBoxFor(a => a.Address, new { @class = "form-control" })
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="height">Өндөр</label>
-                    <input type="text" id="height" class="form-control" name="height">
+                    @Html.TextBoxFor(a => a.Height, new { @class = "form-control" })
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="weight">Жин</label>
-                    <input type="text" id="weight" class="form-control" name="weight">
+                    @Html.TextBoxFor(a => a.Weight, new { @class = "form-control" })
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="bloodType">Цусны бүлэг</label>
-                    @Html.DropDownList("bloodType", new SelectList(ViewBag.BloodType, "Value", "Text"), new { @class = "form-control", id = "bloodType", name = "bloodType" })
+                    @Html.DropDownListFor(a=>a.BloodType, new SelectList(ViewBag.BloodTypeList, "Value", "Text"), new { @class = "form-control"})
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="shoeSize">Гуталны размер</label>
-                    <input type="text" id="shoeSize" class="form-control" name="shoeSize">
+                    @Html.TextBoxFor(a => a.ShoeSize, new { @class = "form-control" })
                 </div>
                 <div class="form-group col-lg-offset-6">
                     <label for="jobStatus">Ажилтаны төлөв</label>
-                    @Html.DropDownList("jobStatus", new SelectList(ViewBag.JobStatus, "Value", "Text"), new { @class = "form-control", id = "jobStatus", name = "jobStatus" })
+                    @Html.DropDownListFor(a=>a.JobStatus, new SelectList(ViewBag.JobStatusList, "Value", "Text"), new { @class = "form-control"})
                 </div>
                 <div class="form-group col-lg-offset-6">
-                    <label style="color:red">@ViewBag.Message</label>
+                    <label for="jobStatus">Нууц үг</label>
+                    @Html.TextBoxFor(a => a.Password, new { @class = "form-control", type="password" })
                 </div>
                 <div class="form-group col-lg-offset-6">
-                    <button class="btn btn-primary" type="submit">Бүртгэх</button>
+                    <button class="btn btn-primary" type="submit">@submitText</button>
                 </div>
             </div>
-        </form>
     </div>
+}
 </div>
